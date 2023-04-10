@@ -122,7 +122,7 @@ if (isset($_POST['update_resume'])) {
     <title>update resume</title>
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styleupdateresume.css">
 
 </head>
 
@@ -165,7 +165,7 @@ if (isset($_POST['update_resume'])) {
                 <div id=infoGen>
                     <div>
                         <label for="adresse"> adresse :</label><br>
-                        <textarea name="Adress" id="adresse" rows="1" cols="30" value = "<?php echo $fetch['Adress']; ?>">  </textarea>
+                        <textarea name="Adress" id="Adress" rows="1" cols="30"><?php echo $fetch['Adress']; ?></textarea>
                     </div>
                     <div>
                         <fieldset id="civil">

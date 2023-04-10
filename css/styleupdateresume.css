@@ -1,0 +1,97 @@
+/* Form container */
+.update-resume {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    animation: slideIn 1s forwards;
+  }
+  
+  /* Form input fields */
+  .update-resume input[type=text],input[type=number], .update-resume input[type=email], .update-resume input[type=tel], .update-resume select, .update-resume textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    animation: fadeIn 1s forwards;
+  }
+  
+  /* Radio buttons */
+  .update-resume input[type=radio] {
+    margin: 6px;
+    animation: fadeIn 1s forwards;
+  }
+  
+  /* Checkbox */
+  .update-resume input[type=checkbox] {
+    margin: 6px;
+    animation: fadeIn 1s forwards;
+  }
+  
+  /* Submit button */
+  .update-resume input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    animation: slideIn 1s forwards;
+  }
+  
+    /* Href button */
+    .update-resume a {
+        background-color: #af4c4c;
+        color: white;
+        margin: 50px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        animation: slideIn 1s forwards;
+      }
+  /* On focus */
+  .update-resume input[type=text]:focus, .update-resume input[type=email]:focus, .update-resume input[type=tel]:focus, .update-resume select:focus, .update-resume textarea:focus {
+    background-color: #ddd;
+  }
+  
+  /* Error messages */
+  .update-resume .error {
+    color: #ff0000;
+    animation: fadeIn 1s forwards;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
