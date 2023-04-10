@@ -1,0 +1,69 @@
+let formulaire = document.getElementById('form1');
+formulaire.addEventListener('submit',function(e){
+  
+    let name=document.getElementById("nom");
+    let age=document.getElementById("age");
+    let mail = document.getElementById("mail");
+
+    let regExNom=/^[a-zA-Z\s]+$/;
+    let regExEmail= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+    let myError=document.getElementById('erreur');
+    myError.style.color='red';
+    
+    // controle du nom
+    if (name.value.trim()=='')
+    {	
+		myError.innerHTML='Le champ nom est requis';
+		myError.style.color='red';
+		e.preventDefault();
+    }
+    else if(regExNom.test(name.value)==false){
+
+		myError.innerHTML="Le champ nom doit être composé de lettres ou d'espaces";
+		e.preventDefault();
+    }
+    
+
+    //controle de l'age
+     if (age.value.trim()=='')
+    {	
+		myError.innerHTML='Le champ age est requis';
+		e.preventDefault();
+    }
+    else
+	    if(Number(age.value)>120   || Number(age.value) < 16 ){
+			myError.innerHTML="veuillez saisir un age valide";
+			e.preventDefault();
+	    }
+
+    //controle de l'email
+    if (mail.value.trim()=='')
+    {	
+		myError.innerHTML='Le champ Email est requis';
+		e.preventDefault();
+    }
+    else 
+      if(regExEmail.test(mail.value)==false){
+		myError.innerHTML="L'adresse email n'est pas valide";
+		e.preventDefault();
+      }
+ //controle des compétences
+ 
+ let select = document.getElementById('competences');
+    listeComp = "";
+    for (let i=0; i<select.length; i++) {
+        if (select[i].selected) {
+            listeComp += select[i].value + '  ';		
+        }
+    }
+
+  if (listeComp.trim()=='')
+    {	
+		myError.innerHTML='Veuillez saisir au moins une compétence';
+		e.preventDefault();
+    }
+
+
+
+
+})

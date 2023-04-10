@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cours JavaScript</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="dom.css" />
+        <script src='dom.js' async></script>
+    </head>
+    
+    <body>
+        <h1>curriculum vitae </h1>
+        
+        <form name="formCV" method="post" action="traitement.php">
+            <fieldset >
+              
+                    <legend>informations générales </legend>
+                
+                    <label for="nom"> Nom et prénom :</label>
+                    <input type="text" name="nom" id="nom" placeholder="nom et prénom" size="30" maxlength="40"> 
+                
+                    <label for="dateNaissance"> date de naissance :</label>
+                    <input type="date" name="dateNaissance" id="dateNaissance"> <br>
+            <div id=infoGen>
+                <div >
+                    <label for="adresse"> adresse :</label><br>
+                    <textarea name="adresse" id="adresse" rows="5" cols = "30">  </textarea> 
+                </div>
+                <div>
+                    <fieldset id ="civil">
+                      <legend>état civil </legend> 
+                      <input type="radio" name="etatCivil" value="celibataire" id="celibataire" /> <label for="celibataire">célibataire</label><br>
+                      <input type="radio" name="etatCivil" value="marié" id="marie" /> <label for="marie">marié</label><br>
+                      <input type="radio" name="etatCivil" value="divorcé" id="divorce" /> <label for="divorce">divorcé</label><br>
+                      <input type="radio" name="etatCivil" value="veuf" id="veuf" /> <label for="veuf">veuf</label><br>
+                    </fieldset>
+                </div>
+                <div>
+                  <label for="nbEnfants"> nombre d'enfants :</label>
+                  <input type="number" name="nbEnfants" id="nbEnfants" placeholder="0" > <br>
+                </div>
+              </div>
+
+            </fieldset>
+
+            <fieldset> 
+                <legend>cursus et compétences </legend>
+                <div id="cursus">
+                    <div>
+                        <label for="competences">compétences </label><br>
+                        <select name="competences" id="competences" multiple>
+                        <optgroup label="Langues">
+                        <option value="arabe">arabe </option>
+                        <option value="Français">Français</option>
+                        <option value="Anglais">Anglais</option>
+                        </optgroup>
+                        <optgroup label="programmation web">
+                        <option value="HTML5">HTML5 </option>
+                        <option value="CSS3">CCS3</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="PHP5">PHP5</option>
+                        </optgroup>
+                        </select> <br> <br>
+                          
+                        <label for="universite">à quelle université vous appartenez ?</label><br>
+                        <select name="universite" id="universite">
+                        <option value="Tunis">Tunis </option>
+                        <option value="Manar">Manar</option>
+                        <option value="carthage">Carthage</option>
+                        <option value="sousse">Sousse</option>
+                        <option value="sfax">Sfax</option>
+                        <option value="Jendouba">Jendouba</option>
+                        <option value="kairouan">Kairouan</option>
+                        <option value="Gabes">Gabes</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        Cochez vos diplomes  :<br>
+                        <input type="checkbox" name="diplomes" value="licence" /> <label for="licence">Licence</label><br>
+                        <input type="checkbox" name="diplomes" value="maîtrise" /> <label for="maitrise">Maîtrise</label><br>
+                        <input type="checkbox" name="diplomes" value="mastère" /> <label for="mastere">Mastere</label><br>
+                        <input type="checkbox" name="diplomes" value="doctorat" /> <label for="doctorat">Doctorat</label>
+                      </div>
+                    </div>
+        <br> Attachez-un CV : <input type="file" name="fichier" id="fichier">
+  </fieldset>
+  <input type="submit" value="envoyer"/>
+   <input type="button" value="effacer" name="BoutonEffacer"/>
+   <input type="button" value="afficherCV" name="BoutonAfficher" onclick="afficherCV()" />
+        
+</form>
+
+    <h2>  Informations générales </h2>
+    <p id="p1"></p>
+    <h2>  Cursus et compétences </h2>
+    <p id="p2"></p>  
+
+    <p id="p3"></p>  
+</body>
+</html>
