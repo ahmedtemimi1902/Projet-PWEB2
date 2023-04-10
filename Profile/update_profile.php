@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../sql/config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
@@ -30,7 +30,7 @@ if(isset($_POST['update_profile'])){
    $update_image = $_FILES['update_image']['name'];
    $update_image_size = $_FILES['update_image']['size'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
-   $update_image_folder = 'uploaded_img/'.$update_image;
+   $update_image_folder = '../uploaded_img/'.$update_image;
 
    if(!empty($update_image)){
       if($update_image_size > 2000000){
@@ -57,7 +57,7 @@ if(isset($_POST['update_profile'])){
    <title>update profile</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -76,7 +76,7 @@ if(isset($_POST['update_profile'])){
          if($fetch['image'] == ''){
             echo '<img src="images/default-avatar.png">';
          }else{
-            echo '<img src="uploaded_img/'.$fetch['image'].'">';
+            echo '<img src="../uploaded_img/'.$fetch['image'].'">';
          }
          if(isset($message)){
             foreach($message as $message){
@@ -104,7 +104,7 @@ if(isset($_POST['update_profile'])){
          </div>
       </div>
       <input type="submit" value="update profile" name="update_profile" class="btn">
-      <a href="home.php" class="delete-btn">go back</a>
+      <a href="../home.php" class="delete-btn">go back</a>
    </form>
 
 </div>

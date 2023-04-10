@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../sql/config.php';
 session_start();
 
 if(isset($_POST['submit'])){
@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
    if(mysqli_num_rows($select) > 0){
       $row = mysqli_fetch_assoc($select);
       $_SESSION['user_id'] = $row['id'];
-      header('location:home.php');
+      header('location:../home.php');
    }else{
       $message[] = 'incorrect email or password!';
    }
@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
    <title>login</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
       <input type="email" name="email" placeholder="enter email" class="box" required>
       <input type="password" name="password" placeholder="enter password" class="box" required>
       <input type="submit" name="submit" value="login now" class="btn">
-      <p>don't have an account? <a href="register.php">regiser now</a></p>
+      <p>don't have an account? <a href="../Signup/register.php">regiser now</a></p>
    </form>
 
 </div>

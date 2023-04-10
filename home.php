@@ -1,17 +1,17 @@
 <?php
 
-include 'config.php';
+include 'sql/config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
 if(!isset($user_id)){
-   header('location:login.php');
+   header('location:Login/login.php');
 };
 
 if(isset($_GET['logout'])){
    unset($user_id);
    session_destroy();
-   header('location:login.php');
+   header('location:Login/login.php');
 }
 
 ?>
@@ -45,9 +45,9 @@ if(isset($_GET['logout'])){
          }
       ?>
       <h3><?php echo $fetch['name']; ?></h3>
-      <a href="update_profile.php" class="btn">update profile</a>
+      <a href="Profile/update_profile.php" class="btn">update profile</a>
       <a href="home.php?logout=<?php echo $user_id; ?>" class="delete-btn">logout</a>
-      <p>new <a href="login.php">login</a> or <a href="register.php">register</a></p>
+      <p>new <a href="login.php">login</a> or <a href="Signup/register.php">register</a></p>
    </div>
 
 </div>

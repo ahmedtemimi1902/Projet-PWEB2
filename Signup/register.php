@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../sql/config.php';
 
 if(isset($_POST['submit'])){
 
@@ -11,7 +11,7 @@ if(isset($_POST['submit'])){
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = 'uploaded_img/'.$image;
+   $image_folder = '../uploaded_img/'.$image;
 
    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
             $message[] = 'registered successfully!';
-            header('location:login.php');
+            header('location:Login/login.php');
          }else{
             $message[] = 'registeration failed!';
          }
@@ -70,7 +70,7 @@ if(isset($_POST['submit'])){
       <input type="password" name="cpassword" placeholder="confirm password" class="box" required>
       <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png">
       <input type="submit" name="submit" value="register now" class="btn">
-      <p>already have an account? <a href="login.php">login now</a></p>
+      <p>already have an account? <a href="Login/login.php">login now</a></p>
    </form>
 
 </div>
