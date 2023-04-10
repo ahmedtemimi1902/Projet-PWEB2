@@ -24,14 +24,17 @@ if(isset($_POST['submit'])){
          $message[] = 'image size is too large!';
       }else{
          $insert = mysqli_query($conn, "INSERT INTO `user_form`(name, email, password, image) VALUES('$name', '$email', '$pass', '$image')") or die('query failed');
+         $user_id = mysqli_insert_id($conn);
+         $insert2 = mysqli_query($conn, "INSERT INTO `resume`(id,FirstN, LastN, Email, Birthday,Status,Adress,Phone,Diploma,Competence,University,Experience) VALUES('$user_id','', '', '$email', '', '', '', '', '', '', '', '')") or die('query failed 2');
 
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
+            if($insert2){
             $message[] = 'registered successfully!';
-            header('location:Login/login.php');
-         }else{
+            header('location:Login/login.php');}
+         else{
             $message[] = 'registeration failed!';
-         }
+         }}
       }
    }
 
@@ -48,7 +51,7 @@ if(isset($_POST['submit'])){
    <title>register</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -70,7 +73,7 @@ if(isset($_POST['submit'])){
       <input type="password" name="cpassword" placeholder="confirm password" class="box" required>
       <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png">
       <input type="submit" name="submit" value="register now" class="btn">
-      <p>already have an account? <a href="Login/login.php">login now</a></p>
+      <p>already have an account? <a href="../Login/login.php">login now</a></p>
    </form>
 
 </div>
