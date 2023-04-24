@@ -5,19 +5,28 @@ session_start();
 
 if(isset($_POST['submit'])){
 
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+  $email = mysqli_real_escape_string($conn, $_POST['email']);
+  $pass = mysqli_real_escape_string($conn, $_POST['password']);
+  $usertype = $_POST['usertype'];
 
-   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+  if($usertype == 'job_seeker') {
+    $select = mysqli_query($conn, "SELECT * FROM `job_seeker` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+    $dashboard_url = '../Profile/JobSeeker/dashboard.php';
+  } else if($usertype == 'employer') {
+    $select = mysqli_query($conn, "SELECT * FROM `employer` WHERE supervisor_email = '$email' AND password = '$pass'") or die('query failed');
+    $dashboard_url = '../Profile/Employer/dashboard.php';
+  } else {
+    $message[] = 'Please select user type!';
+    $dashboard_url = '';
+  }
 
-   if(mysqli_num_rows($select) > 0){
-      $row = mysqli_fetch_assoc($select);
-      $_SESSION['user_id'] = $row['id'];
-      header('location:../home.php');
-   }else{
-      $message[] = 'incorrect email or password!';
-   }
-
+  if(mysqli_num_rows($select) > 0){
+    $row = mysqli_fetch_assoc($select);
+    $_SESSION['user_id'] = $row['id'];
+    header('location:'.$dashboard_url);
+  } else {
+    $message[] = 'Incorrect email or password!';
+  }
 }
 
 ?>
@@ -38,20 +47,25 @@ if(isset($_POST['submit'])){
    
 <div class="form-container">
 
-   <form action="" method="post" enctype="multipart/form-data">
-      <h3>login now</h3>
-      <?php
-      if(isset($message)){
-         foreach($message as $message){
-            echo '<div class="message">'.$message.'</div>';
-         }
+<form action="" method="post">
+  <h3>Login Now</h3>
+  <?php
+    if(isset($message)){
+      foreach($message as $msg){
+        echo '<div class="message">'.$msg.'</div>';
       }
-      ?>
-      <input type="email" name="email" placeholder="enter email" class="box" required>
-      <input type="password" name="password" placeholder="enter password" class="box" required>
-      <input type="submit" name="submit" value="login now" class="btn">
-      <p>don't have an account? <a href="../Signup/register.php">regiser now</a></p>
-   </form>
+    }
+  ?>
+  <input type="email" name="email" placeholder="Enter Email" class="box" required>
+  <input type="password" name="password" placeholder="Enter Password" class="box" required>
+  <select name="usertype" class="box" required>
+    <option value="">Select User Type</option>
+    <option value="job_seeker">Job Seeker</option>
+    <option value="employer">Employer</option>
+  </select>
+  <input type="submit" name="submit" value="Login Now" class="btn">
+  <p>Don't have an account? <a href="../Signup/register.php">Register Now</a></p>
+</form>
 
 </div>
 
