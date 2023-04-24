@@ -118,5 +118,5 @@ form input[type="submit"] {
     <label for="salary">Proposed Salary:</label>
     <input type="number" id="salary" name="salary" required>
       <br>
-    <input type="submit" value="Add Offer">
+    <input type="submit" name ="add_offer" value="Add Offer">
 </form>

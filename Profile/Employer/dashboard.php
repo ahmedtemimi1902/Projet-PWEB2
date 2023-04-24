@@ -114,7 +114,7 @@ if (isset($_GET['delete_id'])) {
     }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['add_offer'])) {
 
         $company = "";
         $result = $conn->query("SELECT * FROM employer WHERE id = $user_id");
