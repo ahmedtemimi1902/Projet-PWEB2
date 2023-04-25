@@ -174,9 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="menu">
             <ul>
                 <li><a href="#" class="menu-link" data-page="add-offer.php">Add Job Offer</a></li>
-                <li><a href="#" class="menu-app" data-page="list-offers.php">List Job Offers</a></li>
+                <li><a href="#" class="menu-link" data-page="list-offers.php">List Job Offers</a></li>
                 <li><a href="#" class="menu-app" data-page="list-applications.php">List Job Applications</a></li>
-                <li><a href="#" class="menu-app" data-page="list-relevant-applications.php">List Relevant Job Applications</a></li>
                 <li><a href="#" class="menu-link" data-page="update_profile.php">Update Profile</a></li>
                 <li><a href="dashboard.php?logout=<?php echo $user_id; ?>" class="logout-btn">logout</a></li>
 
