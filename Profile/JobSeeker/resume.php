@@ -27,6 +27,30 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $diploma_values = $row[$diploma_field];
 
+$uni_field = 'University';
+$email_field = 'Email';
+$status_field = 'Status';
+$Exp_field = 'Experience';
+$Adr_field = 'Adress';
+
+$sql = "SELECT * FROM resume WHERE id = $user_id";
+$result = mysqli_query($conn, $sql);
+$fetch = mysqli_fetch_assoc($result);
+$university = $fetch[$uni_field];
+$Email = $fetch[$email_field];
+$marital_status = $fetch[$status_field];
+$Experience = $fetch[$Exp_field];
+$Adress = $fetch[$Adr_field];
+
+
+
+$diploma_field = 'Diploma';
+$sql = "SELECT $diploma_field FROM resume WHERE id = $user_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$diploma_values = $row[$diploma_field];
+$diploma_array = explode(',', $diploma_values);
+
 
 
 
@@ -179,7 +203,7 @@ $competence_array = explode(',', $competence_values);
                     </div>
                 </div>
                 <input type="submit" value="update resume" name="update_resume" class="btn">
-                <a href="../home.php" class="delete-btn">go back</a>
+                <a href="dashboard.php" class="back-btn">go back</a>
             </fieldset>
 
         </form>
