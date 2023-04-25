@@ -1,59 +1,9 @@
 <?php
 
-include '../sql/config.php';
+include '../../sql/config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
-
-//UPDATE Multiple
-$competence_field = 'Competence'; // replace with the name of the "competence" field in your table
-$sql = "SELECT $competence_field FROM resume WHERE id = $user_id";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
-$competence_values = $row[$competence_field];
-// Step 2: Convert comma-separated values into an array
-$competence_array = explode(',', $competence_values);
-
-// Step 3: Check if form was submitted and update SQL table if necessary
-if (isset($_POST['update_resume'])) {
-    $new_competence_values = implode(',', $_POST['competence']); // combine selected options into comma-separated string
-    if ($new_competence_values != $competence_values) { // check if new values are different from current values
-        $sql = "UPDATE resume SET $competence_field = '$new_competence_values' WHERE id = $user_id";
-        if (mysqli_query($conn, $sql)) {
-            echo "Profile updated successfully";
-        } else {
-            echo "Error updating profile: " . mysqli_error($conn);
-        }
-    }
-}
-
-
-
-// Step 1: Fetch data from SQL table
-$diploma_field = 'Diploma';
-$sql = "SELECT $diploma_field FROM resume WHERE id = $user_id";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($result);
-$diploma_values = $row[$diploma_field];
-
-// Step 2: Convert comma-separated values into an array
-$diploma_array = explode(',', $diploma_values);
-
-// Step 3: Check if form was submitted and update SQL table if necessary
-if (isset($_POST['update_resume'])) {
-    $new_diploma_values = implode(',', $_POST['Diploma']); // combine selected options into comma-separated string
-    if ($new_diploma_values != $diploma_values) { // check if new values are different from current values
-        $sql = "UPDATE resume SET $diploma_field = '$new_diploma_values' WHERE id = $user_id";
-        if (mysqli_query($conn, $sql)) {
-            echo "Profile updated successfully";
-        } else {
-            echo "Error updating profile: " . mysqli_error($conn);
-        }
-    }
-}
-
-
-//Update single
 $uni_field = 'University';
 $email_field = 'Email';
 $status_field = 'Status';
@@ -69,48 +19,25 @@ $marital_status = $fetch[$status_field];
 $Experience = $fetch[$Exp_field];
 $Adress = $fetch[$Adr_field];
 
-if (isset($_POST['update_resume'])) {
-    $university = $_POST['university'];
-
-    if (empty($university)) {
-        $errors[] = 'Please select your university.';
-    } else if ($university == 'Other') {
-        $other_university = trim($_POST['other_university']);
-        if (empty($other_university)) {
-            $errors[] = 'Please specify your university.';
-        }
-    }
 
 
-    $FirstN = $_POST['prenom'];
-    $LastN = $_POST['nom'];
-    echo $_POST['nom'];
-    $Birthday = $_POST['dateNaissance'];
-    $Experience = $_POST['Experience'];
-    $Phone = $_POST['Phone'];
-    $university = $_POST['university'];
-    $marital_status = $_POST['marital_status'];
-    $Adress = $_POST['Adress'];
+$diploma_field = 'Diploma';
+$sql = "SELECT $diploma_field FROM resume WHERE id = $user_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$diploma_values = $row[$diploma_field];
 
-    $query = "UPDATE resume SET FirstN='$FirstN', LastN='$LastN',Email='$Email',Birthday = '$Birthday',Status = '$marital_status',Adress = '$Adress', Phone='$Phone', university='$university', Experience='$Experience' WHERE id=" . $user_id;
 
-    $result = mysqli_query($conn, $query);
 
-    if ($result) {
-        // success message
-        $_SESSION['success'] = 'Resume updated successfully.';
-    } else {
-        // error message
-        $_SESSION['error'] = 'Something went wrong. Please try again.';
-    }
 
-    header('location: update_resume.php');
-    exit();
-}
+$competence_field = 'Competence'; // replace with the name of the "competence" field in your table
+$sql = "SELECT $competence_field FROM resume WHERE id = $user_id";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$competence_values = $row[$competence_field];
+// Step 2: Convert comma-separated values into an array
+$competence_array = explode(',', $competence_values);
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -122,7 +49,6 @@ if (isset($_POST['update_resume'])) {
     <title>update resume</title>
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="../css/styleupdateresume.css">
 
 </head>
 
@@ -137,10 +63,10 @@ if (isset($_POST['update_resume'])) {
         }
         ?>
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="dashboard.php" method="post" enctype="multipart/form-data">
             <?php
-            if (isset($message)) {
-                foreach ($message as $message) {
+            if (isset($messagee)) {
+                foreach ($messagee as $message) {
                     echo '<div class="message">' . $message . '</div>';
                 }
             }
