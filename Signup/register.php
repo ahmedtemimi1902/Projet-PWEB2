@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
       $registrationType = $_POST['registration-type'];
 
       if ($registrationType === 'job-seeker') {
-         // Extract data from the POST request
+         
          $idNumber = $_POST['id-number'];
          $firstName = $_POST['first-name'];
          $lastName = $_POST['last-name'];
@@ -17,13 +17,13 @@ if (isset($_POST['submit'])) {
          $password = $_POST['password'];
          $confirmPassword = $_POST['cpassword'];
 
-         // Check if the passwords match
+         
          if ($password !== $confirmPassword) {
             echo 'Error: Passwords do not match.';
             exit();
          }
 
-         // Check if the username or email already exists
+         
          $query = "SELECT * FROM job_seeker WHERE username = '$username' OR email = '$email'";
          $result = mysqli_query($conn, $query);
 
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
             exit();
          }
 
-         // Upload image to server
+         
          if ($_FILES['image']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['image']['tmp_name'])) {
             $fileTmpPath = $_FILES['image']['tmp_name'];
             $fileName = $_FILES['image']['name'];
@@ -47,13 +47,13 @@ if (isset($_POST['submit'])) {
             $dest_path = $uploadFileDir . $newFileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-               // Insert data into the job_seeker table
+               
                $query = "INSERT INTO job_seeker (id_number, first_name, last_name, username, email, password, image) 
                       VALUES ('$idNumber', '$firstName', '$lastName', '$username', '$email', '$password', '$newFileName')";
 
 
 
-               // Execute the query and handle any errors
+               
                if (mysqli_query($conn, $query)) {
                   $id = mysqli_insert_id($conn);
                   $query2 = "INSERT INTO resume (id, FirstN, LastN, Email) 
@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
             echo 'Error: No file was uploaded.';
          }
       } else if ($registrationType === 'employer') {
-         // Extract data from the POST request
+         
          $companyName = $_POST['company-name'];
          $supervisorFirstName = $_POST['supervisor-first-name'];
          $supervisorLastName = $_POST['supervisor-last-name'];
@@ -80,13 +80,13 @@ if (isset($_POST['submit'])) {
          $password = $_POST['password'];
          $confirmPassword = $_POST['cpassword'];
 
-         // Check if the passwords match
+         
          if ($password !== $confirmPassword) {
             echo 'Error: Passwords do not match.';
             exit();
          }
 
-         // Check if the username or email already exists
+         
          $query = "SELECT * FROM employer WHERE username = '$username' OR supervisor_email = '$supervisorEmail'";
          $result = mysqli_query($conn, $query);
          if (mysqli_num_rows($result) > 0) {
@@ -107,11 +107,11 @@ if (isset($_POST['submit'])) {
             $dest_path = $uploadFileDir . $newFileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-               // Insert data into the employer table
+               
                $query = "INSERT INTO employer (company_name, supervisor_first_name, supervisor_last_name, supervisor_email, irs_code, username, password,image) 
                  VALUES ('$companyName', '$supervisorFirstName', '$supervisorLastName', '$supervisorEmail', '$irsCode', '$username', '$password','$newFileName')";
 
-               // Execute the query and handle any errors
+               
                if (mysqli_query($conn, $query)) {
                   echo 'Registration successful!';
                } else {
@@ -200,7 +200,7 @@ if (isset($_POST['submit'])) {
             const jobSeekerForm = document.getElementById('job-seeker-form');
             const employerForm = document.getElementById('employer-form');
 
-            // Hide the forms initially
+            
             jobSeekerForm.style.display = 'none';
             employerForm.style.display = 'none';
 
@@ -234,7 +234,7 @@ if (isset($_POST['submit'])) {
                      input.removeAttribute('disabled');
                   });
                } else if (selectedType === 'None') {
-                  // Disable both forms
+                  
                   document.querySelectorAll('#job-seeker input, #employer input').forEach(input => {
                      input.setAttribute('disabled', true);
                   });

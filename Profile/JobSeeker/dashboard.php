@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Upload image to server
+        
         if ($_FILES['image']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['image']['tmp_name'])) {
             $fileTmpPath = $_FILES['image']['tmp_name'];
             $fileName = $_FILES['image']['name'];
@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dest_path = $uploadFileDir . $newFileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                // Insert data into the job_seeker table
+                
                 $query = "UPDATE `Employer` SET image = '$newFileName' WHERE id = '$user_id'";
 
-                // Execute the query and handle any errors
+                
                 if (mysqli_query($conn, $query)) {
                     echo 'Registration successful!';
                     header('location:dashboard.php');
@@ -101,18 +101,18 @@ $diploma_array = explode(',', $diploma_values);
 
 
 
-$competence_field = 'Competence'; // replace with the name of the "competence" field in your table
+$competence_field = 'Competence'; 
 $sql = "SELECT $competence_field FROM resume WHERE id = $user_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $competence_values = $row[$competence_field];
-// Step 2: Convert comma-separated values into an array
+
 $competence_array = explode(',', $competence_values);
 
 
 if (isset($_POST['update_resume'])) {
-    $new_competence_values = implode(',', $_POST['competence']); // combine selected options into comma-separated string
-    if ($new_competence_values != $competence_values) { // check if new values are different from current values
+    $new_competence_values = implode(',', $_POST['competence']); 
+    if ($new_competence_values != $competence_values) { 
         $sql = "UPDATE resume SET $competence_field = '$new_competence_values' WHERE id = $user_id";
         if (mysqli_query($conn, $sql)) {
             echo "Profile updated successfully";
@@ -124,8 +124,8 @@ if (isset($_POST['update_resume'])) {
 
 
 if (isset($_POST['update_resume'])) {
-    $new_diploma_values = implode(',', $_POST['Diploma']); // combine selected options into comma-separated string
-    if ($new_diploma_values != $diploma_values) { // check if new values are different from current values
+    $new_diploma_values = implode(',', $_POST['Diploma']); 
+    if ($new_diploma_values != $diploma_values) { 
         $sql = "UPDATE resume SET $diploma_field = '$new_diploma_values' WHERE id = $user_id";
         if (mysqli_query($conn, $sql)) {
             echo "Profile updated successfully";
@@ -164,10 +164,10 @@ if (isset($_POST['update_resume'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        // success message
+        
         $_SESSION['success'] = 'Resume updated successfully.';
     } else {
-        // error message
+        
         $_SESSION['error'] = 'Something went wrong. Please try again.';
     }
 
@@ -226,7 +226,7 @@ if (isset($_GET['apply_id'])) {
         <div class="menu">
             <ul>
                 <li><a href="#" class="menu-link" data-page="resume.php">Resume Update</a></li>
-                <li><a href="#" class="menu-link" data-page="list-offers.php">List Job Offers</a></li>
+                <li><a href="#" class="menu-res" data-page="list-offers.php">List Job Offers</a></li>
                 <li><a href="#" class="menu-app" data-page="list-applications.php">List Job Applications</a></li>
                 <li><a href="#" class="menu-link" data-page="view-resume.php">View Resume</a></li>
                 <li><a href="#" class="menu-link" data-page="update_profile.php">Update Profile</a></li>
@@ -249,10 +249,32 @@ if (isset($_GET['apply_id'])) {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
                 const page = event.target.dataset.page;
+                
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         contentDiv.innerHTML = xhr.responseText;
+                    }
+                }
+                xhr.open('GET', page, true);
+                xhr.send();
+            });
+        });
+
+
+
+        const links1 = document.querySelectorAll('.menu-res');
+
+        links1.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const page = event.target.dataset.page;
+                
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        contentDiv.innerHTML = xhr.responseText;
+                        sortTable(7);
                     }
                 }
                 xhr.open('GET', page, true);
@@ -293,13 +315,38 @@ if (isset($_GET['apply_id'])) {
                 }
             }
             const onLoaded = () => {
-                // Handle loading state
+                
             };
             xhr.addEventListener('load', onLoaded);
             xhr.open('GET', page, true);
             xhr.send();
         });
 
+
+
+
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("myTable");
+            switching = true;
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex].innerHTML;
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex].innerHTML;
+                    if (parseInt(x) < parseInt(y)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
 
     </script>
 

@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Get all job offers created by this employer
+
 $result = $conn->query("SELECT * FROM job_offer WHERE employer_id = $user_id");
 
 if ($result->num_rows > 0) {
@@ -19,7 +19,7 @@ if ($result->num_rows > 0) {
 
       echo '<h3>' . $job_offer_title . '</h3>';
 
-      // Get all applications related to this job offer
+      
       $applications = $conn->query("SELECT * FROM job_application WHERE job_offer_id = $job_offer_id");
 
       if ($applications->num_rows > 0) {
@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
             $id = $application['id'];
             $status = $application['status'];
 
-            // Get applicant's details
+            
             $applicant = $conn->query("SELECT * FROM job_seeker WHERE id = $applicant_id")->fetch_assoc();
             $applicant_name = $applicant['first_name'] . ' ' . $applicant['last_name'];
             $applicant_email = $applicant['email'];
@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
             echo '<strong>CV:</strong> <a href="#" data-applicant-id="' . $applicant_id . '" data-page="get-applicant-details.php" class="view-cv">View CV</a><br>';
             echo '<strong>Status:</strong> ' . $status . '<br>';
 
-            // Add accept and reject buttons for pending applications
+            
             
                echo '<form method="GET" action="dashboard.php">';
                echo '<input type="hidden" name="id" value="' . $id . '">';

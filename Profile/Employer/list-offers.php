@@ -87,49 +87,10 @@ $result = $conn->query("SELECT * FROM job_offer WHERE employer_id = $user_id ORD
                     <?php echo $row['salary']; ?> USD
                 </td>
                 <td><a href="dashboard.php?delete_id=<?php echo $row['id']; ?>">Delete</a></td>
-                <td> <a href="#" class="view-app" data-page="list-relevant-applications.php">View</a></td>
+                <td> <a href="#" class="view-app" data-page="list-relevant-applications.php" data-applicant-id="<?php echo $row['id']; ?>">View</a></td>
             </tr>
             <?php
         }
     }
     ?>
 </table>
-
-<script>
-     const link2 = document.querySelector('a.menu-app[data-page="list-relevant-applications.php"]');
-        link2.addEventListener('click', (event) => {
-
-            event.preventDefault();
-            const page = event.target.dataset.page;
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    contentDiv.innerHTML = xhr.responseText;
-                    xhr.removeEventListener('load', onLoaded);
-                    const linke2 = document.querySelectorAll('a.view-cv');
-                    linke2.forEach((link) => {
-                        link.addEventListener('click', (event) => {
-                            event.preventDefault();
-                            const page = event.target.dataset.page;
-                            const id = link.getAttribute('data-applicant-id');
-                            const xhr = new XMLHttpRequest();
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    contentDiv.innerHTML = xhr.responseText;
-                                }
-                            }
-                            xhr.open('GET', `${page}?id=${id}`, true);
-                            xhr.send();
-                        });
-                    });
-                }
-            }
-            const onLoaded = () => {
-                // Handle loading state
-            };
-            xhr.addEventListener('load', onLoaded);
-            xhr.open('GET', page, true);
-            xhr.send();
-        });
-
-</script>

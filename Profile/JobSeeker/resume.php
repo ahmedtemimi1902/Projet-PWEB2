@@ -54,12 +54,12 @@ $diploma_array = explode(',', $diploma_values);
 
 
 
-$competence_field = 'Competence'; // replace with the name of the "competence" field in your table
+$competence_field = 'Competence'; 
 $sql = "SELECT $competence_field FROM resume WHERE id = $user_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $competence_values = $row[$competence_field];
-// Step 2: Convert comma-separated values into an array
+
 $competence_array = explode(',', $competence_values);
 ?>
 
@@ -138,7 +138,7 @@ $competence_array = explode(',', $competence_values);
                     <div>
                         <label for="competences">compétences </label><br>
                         <?php
-                        // Step 4: Generate select form options with selected attribute for matching values
+                        
                         $languages = [
                             'English' => 'Language',
                             'French' => 'Language',
@@ -148,8 +148,8 @@ $competence_array = explode(',', $competence_values);
                             'Python' => 'Programming',
                             'Ruby' => 'Programming',
                             'PHP' => 'Programming'
-                        ]; // replace with your own list of options and categories
-                        $categories = array_unique(array_values($languages)); // get unique category names
+                        ]; 
+                        $categories = array_unique(array_values($languages)); 
                         echo '<select name="competence[]" multiple size="' . 10 . '">';
                         foreach ($categories as $category) {
                             echo "<optgroup label=\"$category\">";
@@ -179,14 +179,14 @@ $competence_array = explode(',', $competence_values);
                     <div>
                         Cochez vos diplomes :<br>
                         <?php
-                        // Step 4: Generate select form options with selected attribute for matching values
+                        
                         $diplomas = [
                             'High School Diploma',
                             'Associate Degree',
-                            'Bachelor Degree',
-                            'Master Degree',
-                            'Doctoral Degree'
-                        ]; // replace with your own list of options
+                            'BSc',
+                            'MSc',
+                            'PhD'
+                        ]; 
                         
                         echo '<select name="Diploma[]" multiple>';
                         foreach ($diplomas as $diploma) {

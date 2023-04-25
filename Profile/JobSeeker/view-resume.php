@@ -6,10 +6,10 @@ $user_id = $_SESSION['user_id'];
 
     $applicantId = $user_id;
    
-    // Get the applicant details from the database
+    
     $applicant = $conn->query("SELECT * FROM resume WHERE id = $applicantId")->fetch_assoc();
       
-    // Generate the HTML code for the applicant details
+    
     $html = '<h2>' . $applicant['FirstN'] . ' ' . $applicant['LastN'] . '</h2>';
     $html .= '<p><strong>Email:</strong> ' . $applicant['Email'] . '</p>';
     $html .= '<p><strong>Birthday:</strong> ' . $applicant['Birthday'] . '</p>';

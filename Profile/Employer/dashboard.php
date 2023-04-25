@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Upload image to server
+        
         if ($_FILES['image']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['image']['tmp_name'])) {
             $fileTmpPath = $_FILES['image']['tmp_name'];
             $fileName = $_FILES['image']['name'];
@@ -54,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dest_path = $uploadFileDir . $newFileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                // Insert data into the job_seeker table
+                
                 $query = "UPDATE `Employer` SET image = '$newFileName' WHERE id = '$user_id'";
 
-                // Execute the query and handle any errors
+                
                 if (mysqli_query($conn, $query)) {
                     echo 'Registration successful!';
                     header('location:dashboard.php');
@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
             const onLoaded = () => {
-                // Handle loading state
+                
             };
             xhr.addEventListener('load', onLoaded);
             xhr.open('GET', page, true);
@@ -267,18 +267,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         link.addEventListener('click', (event) => {
                             event.preventDefault();
                             const page = event.target.dataset.page;
+                            const ide = link.getAttribute('data-applicant-id');
                             const xhr = new XMLHttpRequest();
                             xhr.onreadystatechange = function () {
                                 if (xhr.readyState === 4 && xhr.status === 200) {
                                     contentDiv.innerHTML = xhr.responseText;
                                     xhr.removeEventListener('load', onLoaded);
+                                    sortTable(2);
                                     const linke4 = document.querySelectorAll('a.view-cv');
                                     linke4.forEach((link) => {
                                         link.addEventListener('click', (event) => {
                                             event.preventDefault();
                                             const page = event.target.dataset.page;
                                             const id = link.getAttribute('data-applicant-id');
-                                            console.log("dd" + id);
                                             const xhr = new XMLHttpRequest();
                                             xhr.onreadystatechange = function () {
                                                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -291,14 +292,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     });
                                 }
                             }
-                            xhr.open('GET', page, true);
+                            xhr.open('GET', `${page}?ido=${ide}`, true);
                             xhr.send();
                         });
                     });
                 }
             }
             const onLoaded = () => {
-                // Handle loading state
+                
             };
             xhr.addEventListener('load', onLoaded);
             xhr.open('GET', page, true);
@@ -306,6 +307,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
 
 
+
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("myTable");
+            switching = true;
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex].innerHTML;
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex].innerHTML;
+                    if (parseInt(x) < parseInt(y)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
 
     </script>
 
