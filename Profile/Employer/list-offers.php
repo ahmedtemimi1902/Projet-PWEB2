@@ -87,7 +87,7 @@ $result = $conn->query("SELECT * FROM job_offer WHERE employer_id = $user_id ORD
                     <?php echo $row['salary']; ?> USD
                 </td>
                 <td><a href="dashboard.php?delete_id=<?php echo $row['id']; ?>">Delete</a></td>
-                <td> <a href="#" class="menu-app" data-page="list-relevant-applications.php">View</a></td>
+                <td> <a href="#" class="view-app" data-page="list-relevant-applications.php">View</a></td>
             </tr>
             <?php
         }

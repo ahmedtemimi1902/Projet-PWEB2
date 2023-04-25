@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="menu">
             <ul>
                 <li><a href="#" class="menu-link" data-page="add-offer.php">Add Job Offer</a></li>
-                <li><a href="#" class="menu-link" data-page="list-offers.php">List Job Offers</a></li>
+                <li><a href="#" class="menu-app" data-page="list-offers.php">List Job Offers</a></li>
                 <li><a href="#" class="menu-app" data-page="list-applications.php">List Job Applications</a></li>
                 <li><a href="#" class="menu-link" data-page="update_profile.php">Update Profile</a></li>
                 <li><a href="dashboard.php?logout=<?php echo $user_id; ?>" class="logout-btn">logout</a></li>
@@ -250,78 +250,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-        const link2 = document.querySelector('a.menu-app[data-page="list-relevant-applications.php"]');
-        link2.addEventListener('click', (event) => {
-
-            event.preventDefault();
-            const page = event.target.dataset.page;
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    contentDiv.innerHTML = xhr.responseText;
-                    xhr.removeEventListener('load', onLoaded);
-                    const linke2 = document.querySelectorAll('a.view-cv');
-                    linke2.forEach((link) => {
-                        link.addEventListener('click', (event) => {
-                            event.preventDefault();
-                            const page = event.target.dataset.page;
-                            const id = link.getAttribute('data-applicant-id');
-                            const xhr = new XMLHttpRequest();
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    contentDiv.innerHTML = xhr.responseText;
-                                }
-                            }
-                            xhr.open('GET', `${page}?id=${id}`, true);
-                            xhr.send();
-                        });
-                    });
-                }
-            }
-            const onLoaded = () => {
-                // Handle loading state
-            };
-            xhr.addEventListener('load', onLoaded);
-            xhr.open('GET', page, true);
-            xhr.send();
-        });
 
 
         const link3 = document.querySelector('a.menu-app[data-page="list-offers.php"]');
-        link3.addEventListener('click', (event) => {
+link3.addEventListener('click', (event) => {
 
-            event.preventDefault();
-            const page = event.target.dataset.page;
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    contentDiv.innerHTML = xhr.responseText;
-                    xhr.removeEventListener('load', onLoaded);
-                    const linke3 = document.querySelectorAll('a.view-cv');
-                    linke3.forEach((link) => {
-                        link.addEventListener('click', (event) => {
-                            event.preventDefault();
-                            const page = event.target.dataset.page;
-                            const id = link.getAttribute('data-applicant-id');
-                            const xhr = new XMLHttpRequest();
-                            xhr.onreadystatechange = function () {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    contentDiv.innerHTML = xhr.responseText;
-                                }
-                            }
-                            xhr.open('GET', page, true);
-                            xhr.send();
-                        });
-                    });
-                }
-            }
-            const onLoaded = () => {
-                // Handle loading state
-            };
-            xhr.addEventListener('load', onLoaded);
-            xhr.open('GET', page, true);
-            xhr.send();
-        });
+    event.preventDefault();
+    const page = event.target.dataset.page;
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            contentDiv.innerHTML = xhr.responseText;
+            xhr.removeEventListener('load', onLoaded);
+            const linke3 = document.querySelectorAll('a.view-app');
+            linke3.forEach((link) => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const page = event.target.dataset.page;
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            contentDiv.innerHTML = xhr.responseText;
+                            xhr.removeEventListener('load', onLoaded);
+                            const linke4 = document.querySelectorAll('a.view-cv');
+                            linke4.forEach((link) => {
+                                link.addEventListener('click', (event) => {
+                                    event.preventDefault();
+                                    const page = event.target.dataset.page;
+                                    const id = link.getAttribute('data-applicant-id');
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === 4 && xhr.status === 200) {
+                                            contentDiv.innerHTML = xhr.responseText;
+                                        }
+                                    }
+                                    xhr.open('GET', `${page}?id=${id}`, true);
+                                    xhr.send();
+                                });
+                            }); // <-- Added missing closing parenthesis here
+                        }
+                    }
+                    xhr.open('GET', page, true);
+                    xhr.send();
+                });
+            });
+        }
+    }
+    const onLoaded = () => {
+        // Handle loading state
+    };
+    xhr.addEventListener('load', onLoaded);
+    xhr.open('GET', page, true);
+    xhr.send();
+});
+
 
 
     </script>
