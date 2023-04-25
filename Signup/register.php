@@ -51,8 +51,14 @@ if (isset($_POST['submit'])) {
                $query = "INSERT INTO job_seeker (id_number, first_name, last_name, username, email, password, image) 
                       VALUES ('$idNumber', '$firstName', '$lastName', '$username', '$email', '$password', '$newFileName')";
 
+
+
                // Execute the query and handle any errors
                if (mysqli_query($conn, $query)) {
+                  $id = mysqli_insert_id($conn);
+                  $query2 = "INSERT INTO resume (id, FirstN, LastN, Email) 
+                  VALUES ('$id', '$firstName', '$lastName', '$email')";
+                  mysqli_query($conn, $query2);
                   echo 'Registration successful!';
                } else {
                   echo 'Error: ' . mysqli_error($conn);
@@ -162,7 +168,7 @@ if (isset($_POST['submit'])) {
          </select>
 
          <div id="job-seeker-form">
-            <input type="text" name="id-number" placeholder="enter ID number" class="box" required >
+            <input type="text" name="id-number" placeholder="enter ID number" class="box" required>
             <input type="text" name="first-name" placeholder="enter first name" class="box" required disabled>
             <input type="text" name="last-name" placeholder="enter last name" class="box" required disabled>
             <input type="text" name="name" placeholder="enter username" class="box" required disabled>
@@ -218,7 +224,7 @@ if (isset($_POST['submit'])) {
                      input.setAttribute('disabled', true);
                   });
                   document.querySelectorAll('#job-seeker-form input').forEach(input => {
-                    input.removeAttribute('disabled');
+                     input.removeAttribute('disabled');
                   });
                } else if (selectedType === 'employer') {
                   document.querySelectorAll('#job-seeker-form input').forEach(input => {

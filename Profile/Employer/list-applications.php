@@ -28,14 +28,13 @@ if ($result->num_rows > 0) {
          while($application = $applications->fetch_assoc()) {
             $applicant_id = $application['applicant_id'];
             $id = $application['id'];
-            header('X-Variable: '.$myVariable);
             $status = $application['status'];
 
             // Get applicant's details
             $applicant = $conn->query("SELECT * FROM job_seeker WHERE id = $applicant_id")->fetch_assoc();
             $applicant_name = $applicant['first_name'] . ' ' . $applicant['last_name'];
             $applicant_email = $applicant['email'];
-            
+            if ($status == 'Pending') {
             
 
             echo '<li>';
@@ -45,11 +44,11 @@ if ($result->num_rows > 0) {
             echo '<strong>Status:</strong> ' . $status . '<br>';
 
             // Add accept and reject buttons for pending applications
-            if ($status == 'Pending') {
+            
                echo '<form method="GET" action="dashboard.php">';
                echo '<input type="hidden" name="id" value="' . $id . '">';
-               echo '<input type="submit" name="delete_cn" value="Accept">';
-               echo '<input type="submit" name="delete_cn" value="Reject">';
+               echo '<input type="submit" name="accept" value="Accept">';
+               echo '<input type="submit" name="reject" value="Reject">';
                echo '</form>';
             }
 

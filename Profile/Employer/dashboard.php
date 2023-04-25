@@ -75,26 +75,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (isset($_GET['id'])) {
-    $delete_id = mysqli_real_escape_string($conn, $_GET['id']);
-    $delete = mysqli_query($conn, "DELETE FROM job_application WHERE id = $delete_id");
+if (isset($_GET['accept'])) {
+    $offer_id = mysqli_real_escape_string($conn, $_GET['id']);
+    $update = mysqli_query($conn, "UPDATE job_application set status = 'Accepted' WHERE id = $offer_id");
 
-    if ($delete) {
+    if ($update) {
         header('location:dashboard.php');
     } else {
-        echo '<div class="error">Error in deleting job offer!</div>';
+        echo '<div class="error">Error in updating job offer status!</div>';
         echo mysqli_error($conn);
     }
 }
 
-if (isset($_GET['id'])) {
-    $delete_id = mysqli_real_escape_string($conn, $_GET['id']);
-    $delete = mysqli_query($conn, "DELETE FROM job_application WHERE id = $delete_id");
+if (isset($_GET['reject'])) {
+    $offer_id = mysqli_real_escape_string($conn, $_GET['id']);
+    $update = mysqli_query($conn, "UPDATE job_application set status = 'Rejected' WHERE id = $offer_id");
 
-    if ($delete) {
+    if ($update) {
         header('location:dashboard.php');
     } else {
-        echo '<div class="error">Error in deleting job offer!</div>';
+        echo '<div class="error">Error in updating job offer status!</div>';
         echo mysqli_error($conn);
     }
 }
@@ -174,9 +174,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="menu">
             <ul>
                 <li><a href="#" class="menu-link" data-page="add-offer.php">Add Job Offer</a></li>
-                <li><a href="#" class="menu-link" data-page="list-offers.php">List Job Offers</a></li>
+                <li><a href="#" class="menu-app" data-page="list-offers.php">List Job Offers</a></li>
                 <li><a href="#" class="menu-app" data-page="list-applications.php">List Job Applications</a></li>
-                <li><a href="#" class="menu-link" data-page="list-relevant-applications.php">List Relevant Job Applications</a></li>
+                <li><a href="#" class="menu-app" data-page="list-relevant-applications.php">List Relevant Job Applications</a></li>
                 <li><a href="#" class="menu-link" data-page="update_profile.php">Update Profile</a></li>
                 <li><a href="dashboard.php?logout=<?php echo $user_id; ?>" class="logout-btn">logout</a></li>
 
@@ -235,6 +235,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 }
                             }
                             xhr.open('GET', `${page}?id=${id}`, true);
+                            xhr.send();
+                        });
+                    });
+                }
+            }
+            const onLoaded = () => {
+                // Handle loading state
+            };
+            xhr.addEventListener('load', onLoaded);
+            xhr.open('GET', page, true);
+            xhr.send();
+        });
+
+
+
+
+        const link2 = document.querySelector('a.menu-app[data-page="list-relevant-applications.php"]');
+        link2.addEventListener('click', (event) => {
+
+            event.preventDefault();
+            const page = event.target.dataset.page;
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    contentDiv.innerHTML = xhr.responseText;
+                    xhr.removeEventListener('load', onLoaded);
+                    const linke2 = document.querySelectorAll('a.view-cv');
+                    linke2.forEach((link) => {
+                        link.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            const page = event.target.dataset.page;
+                            const id = link.getAttribute('data-applicant-id');
+                            const xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    contentDiv.innerHTML = xhr.responseText;
+                                }
+                            }
+                            xhr.open('GET', `${page}?id=${id}`, true);
+                            xhr.send();
+                        });
+                    });
+                }
+            }
+            const onLoaded = () => {
+                // Handle loading state
+            };
+            xhr.addEventListener('load', onLoaded);
+            xhr.open('GET', page, true);
+            xhr.send();
+        });
+
+
+        const link3 = document.querySelector('a.menu-app[data-page="list-offers.php"]');
+        link3.addEventListener('click', (event) => {
+
+            event.preventDefault();
+            const page = event.target.dataset.page;
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    contentDiv.innerHTML = xhr.responseText;
+                    xhr.removeEventListener('load', onLoaded);
+                    const linke3 = document.querySelectorAll('a.view-cv');
+                    linke3.forEach((link) => {
+                        link.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            const page = event.target.dataset.page;
+                            const id = link.getAttribute('data-applicant-id');
+                            const xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    contentDiv.innerHTML = xhr.responseText;
+                                }
+                            }
+                            xhr.open('GET', page, true);
                             xhr.send();
                         });
                     });
