@@ -253,56 +253,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         const link3 = document.querySelector('a.menu-app[data-page="list-offers.php"]');
-link3.addEventListener('click', (event) => {
+        link3.addEventListener('click', (event) => {
 
-    event.preventDefault();
-    const page = event.target.dataset.page;
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            contentDiv.innerHTML = xhr.responseText;
-            xhr.removeEventListener('load', onLoaded);
-            const linke3 = document.querySelectorAll('a.view-app');
-            linke3.forEach((link) => {
-                link.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const page = event.target.dataset.page;
-                    const xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            contentDiv.innerHTML = xhr.responseText;
-                            xhr.removeEventListener('load', onLoaded);
-                            const linke4 = document.querySelectorAll('a.view-cv');
-                            linke4.forEach((link) => {
-                                link.addEventListener('click', (event) => {
-                                    event.preventDefault();
-                                    const page = event.target.dataset.page;
-                                    const id = link.getAttribute('data-applicant-id');
-                                    const xhr = new XMLHttpRequest();
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState === 4 && xhr.status === 200) {
-                                            contentDiv.innerHTML = xhr.responseText;
-                                        }
-                                    }
-                                    xhr.open('GET', `${page}?id=${id}`, true);
-                                    xhr.send();
-                                });
-                            }); // <-- Added missing closing parenthesis here
-                        }
-                    }
-                    xhr.open('GET', page, true);
-                    xhr.send();
-                });
-            });
-        }
-    }
-    const onLoaded = () => {
-        // Handle loading state
-    };
-    xhr.addEventListener('load', onLoaded);
-    xhr.open('GET', page, true);
-    xhr.send();
-});
+            event.preventDefault();
+            const page = event.target.dataset.page;
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    contentDiv.innerHTML = xhr.responseText;
+                    xhr.removeEventListener('load', onLoaded);
+                    const linke3 = document.querySelectorAll('a.view-app');
+                    linke3.forEach((link) => {
+                        link.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            const page = event.target.dataset.page;
+                            const xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                    contentDiv.innerHTML = xhr.responseText;
+                                    xhr.removeEventListener('load', onLoaded);
+                                    const linke4 = document.querySelectorAll('a.view-cv');
+                                    linke4.forEach((link) => {
+                                        link.addEventListener('click', (event) => {
+                                            event.preventDefault();
+                                            const page = event.target.dataset.page;
+                                            const id = link.getAttribute('data-applicant-id');
+                                            console.log("dd" + id);
+                                            const xhr = new XMLHttpRequest();
+                                            xhr.onreadystatechange = function () {
+                                                if (xhr.readyState === 4 && xhr.status === 200) {
+                                                    contentDiv.innerHTML = xhr.responseText;
+                                                }
+                                            }
+                                            xhr.open('GET', `${page}?id=${id}`, true);
+                                            xhr.send();
+                                        });
+                                    });
+                                }
+                            }
+                            xhr.open('GET', page, true);
+                            xhr.send();
+                        });
+                    });
+                }
+            }
+            const onLoaded = () => {
+                // Handle loading state
+            };
+            xhr.addEventListener('load', onLoaded);
+            xhr.open('GET', page, true);
+            xhr.send();
+        });
 
 
 
