@@ -10,9 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 echo "<h1>List of Potential Employees From Best To Worst Matching Score</h1>";
 
 $user_id = $_SESSION['user_id'];
-$result = $conn->query("SELECT * FROM job_seeker ORDER BY id DESC");
-
-
 
 $sql1 = "SELECT * FROM job_seeker";
 $result1 = $conn->query($sql1);
