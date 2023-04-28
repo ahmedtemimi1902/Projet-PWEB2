@@ -27,7 +27,7 @@ $result1 = $conn->query($sql1);
 
 while ($row1 = $result1->fetch_assoc()) {
     
-    $sql2 = "SELECT * FROM resume WHERE id = 11 ";
+    $sql2 = "SELECT * FROM resume WHERE id = ".$user_id;
     $result2 = $conn->query($sql2);
     
     if ($result2->num_rows > 0) {
