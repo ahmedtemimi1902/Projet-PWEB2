@@ -30,82 +30,95 @@ $user_id = $_SESSION['user_id'];
       ?>
       <style>
          form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-         }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
 
-         .message {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
-         }
+.message {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 10px;
+}
 
-         .flex {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            width: 100%;
-         }
+.flex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
 
-         .inputBox {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin: 10px;
-         }
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px;
+}
 
-         .box {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-            width: 300px;
-         }
+.box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 300px;
+}
 
-         input[type="email"],
-         input[type="password"] {
-            margin-top: 15px;
-         }
+input[type="email"],
+input[type="password"] {
+  margin-top: 15px;
+  border: none;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #4a4a4a;
+}
 
-         .btn {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-         }
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0px 0px 3px #62bffc;
+}
 
-         .btn:hover {
-            background-color: #3e8e41;
-         }
+.btn {
+  background-color: #62bffc;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
 
-         .delete-btn {
-            background-color: #f44336;
-            border: none;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-         }
+.btn:hover {
+  background-color: #4797b2;
+}
 
-         .delete-btn:hover {
-            background-color: #e53935;
-         }
+.delete-btn {
+  background-color: #ff6b6b;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+  background-color: #d15050;
+}
+
       </style>
       <form action="dashboard.php" method="POST" enctype="multipart/form-data">
          <?php

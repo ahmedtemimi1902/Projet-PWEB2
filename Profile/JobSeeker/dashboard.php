@@ -25,14 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update_pass = mysqli_real_escape_string($conn, $_POST['update_pass']);
         $new_pass = mysqli_real_escape_string($conn, $_POST['new_pass']);
         $confirm_pass = mysqli_real_escape_string($conn, $_POST['confirm_pass']);
-
+        echo $old_pass."eee";
+        echo $new_pass;
+        echo $confirm_pass;
         if (!empty($update_pass) || !empty($new_pass) || !empty($confirm_pass)) {
             if ($update_pass != $old_pass) {
                 $message[] = 'old password not matched!';
             } elseif ($new_pass != $confirm_pass) {
                 $message[] = 'confirm password not matched!';
             } else {
-                mysqli_query($conn, "UPDATE `Employer` SET password = '$confirm_pass' WHERE id = '$user_id'") or die('query failed');
+                mysqli_query($conn, "UPDATE `job_seeker` SET password = '$confirm_pass' WHERE id = '$user_id'") or die('query failed');
                 $message[] = 'password updated successfully!';
             }
         }
@@ -53,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
                 
-                $query = "UPDATE `Employer` SET image = '$newFileName' WHERE id = '$user_id'";
+                $query = "UPDATE `job_seeker` SET image = '$newFileName' WHERE id = '$user_id'";
 
                 
                 if (mysqli_query($conn, $query)) {

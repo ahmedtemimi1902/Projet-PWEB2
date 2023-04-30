@@ -97,36 +97,67 @@ echo "</table>";
 
 <style>
     .job-offers {
-        width: 100%;
-        border-collapse: collapse;
-    }
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  padding: 16px;
+  background-color: #f8f8f8;
+  border: none; /* Remove default border */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* Use box-shadow for border effect */
+  border: 2px solid #6c5ce7; /* Use a solid border style and a custom color */
 
-    .job-offers th {
-        font-weight: bold;
-        background-color: #f5f5f5;
-        border: 1px solid #ccc;
-        padding: 8px;
-    }
 
-    .job-offers td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
+}
 
-    }
+.job-offers tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+.job-offers tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+
+.job-offers th {
+  font-weight: bold;
+  background-color: #666;
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.job-offers td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+  color: #333;
+}
+.job-offers tbody tr:hover {
+  background-color: #eee;
+}
+
+
+    
 
     .job-offers tbody tr:nth-child(even) {
         background-color: #f5f5f5;
     }
 
     .job-offers a {
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #333;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-    }
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #ff6600;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.job-offers a:hover {
+  background-color: #e55d00;
+}
     .job-offers button {
         display: inline-block;
         padding: 8px 16px;

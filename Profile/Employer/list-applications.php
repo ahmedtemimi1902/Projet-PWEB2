@@ -47,8 +47,8 @@ if ($result->num_rows > 0) {
             
                echo '<form method="GET" action="dashboard.php">';
                echo '<input type="hidden" name="id" value="' . $id . '">';
-               echo '<input type="submit" name="accept" value="Accept">';
-               echo '<input type="submit" name="reject" value="Reject">';
+               echo '<input type="submit" name="accept" value="Accept" class="accept-button">';
+               echo '<input type="submit" name="reject" value="Reject" class="reject-button">';
                echo '</form>';
             }
 
@@ -66,3 +66,65 @@ if ($result->num_rows > 0) {
    echo 'No job offers found for this employer.';
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+   .accept-button {
+      background: #faf5f5;
+	color: #008000;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
+}
+.accept-button:hover{
+   background: #09cc02;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
+}
+
+.reject-button {
+   background: #faf5f5;
+	color: #ff0000;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
+}
+.reject-button:hover{
+   background: #f20202;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;}
+   .view-cv {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px #eee;
+
+}
+
+.view-cv:hover {
+  background-color: #0069d9;
+}
+
+
+</style>
+</head>
+<body>
+  
+</body>
+</html>

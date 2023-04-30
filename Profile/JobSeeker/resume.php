@@ -73,6 +73,123 @@ $competence_array = explode(',', $competence_values);
     <title>update resume</title>
 
     <!-- custom css file link  -->
+    <style> 
+        .update-resume {
+  margin: auto;
+  max-width: 700px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 20px;
+}
+
+legend {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"]{
+    border: 2px solid black;
+
+}
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+select[multiple] {
+  height: auto;
+}
+
+#university {
+  margin-bottom: 10px;
+}
+
+#infoGen {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+#infoGen div {
+  width: 48%;
+}
+
+#civil {
+  display: flex;
+}
+
+#civil label {
+  margin-right: 10px;
+}
+
+.message {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.message.success {
+  background-color: #4CAF50;
+}
+
+.message.info {
+  background-color: #2196F3;
+}
+
+.message.warning {
+  background-color: #ff9800;
+}
+
+.message:hover {
+  opacity: 0.8;
+}
+.btn {
+	background: #B9DFFF;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
+}
+
+.btn:hover {
+	background: #016ABC;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
+}
+
+</style>
 
 </head>
 
@@ -147,7 +264,12 @@ $competence_array = explode(',', $competence_values);
                             'JavaScript' => 'Programming',
                             'Python' => 'Programming',
                             'Ruby' => 'Programming',
-                            'PHP' => 'Programming'
+                            'PHP' => 'Programming',
+                            'C++' => 'Programming',
+                            'C' => 'Programming',
+                            'C#' => 'Programming',
+                            'Swift' => 'Programming',
+                            'Java' => 'Programming',
                         ]; 
                         $categories = array_unique(array_values($languages)); 
                         echo '<select name="competence[]" multiple size="' . 10 . '">';
@@ -168,11 +290,19 @@ $competence_array = explode(',', $competence_values);
                         <select id="university" name="university">
                             <option value="">--Select University--</option>
                             <option value="University of ABC" <?php if ($university == 'University of ABC')
-                                echo 'selected'; ?>>University of ABC</option>
+                                echo 'selected'; ?>>ISG Tunis</option>
                             <option value="University of XYZ" <?php if ($university == 'University of XYZ')
-                                echo 'selected'; ?>>University of XYZ</option>
-                            <option value="Other" <?php if ($university == 'Other')
-                                echo 'selected'; ?>>Other</option>
+                                echo 'selected'; ?>>IHEC Carthage</option>
+                            <option value="Other" <?php if ($university == 'ISI')
+                                echo 'selected'; ?>>ESPRIT</option>
+                                 <option value="Other" <?php if ($university == 'ESPRIT')
+                                echo 'selected'; ?>>ESPRIT</option>
+                                 <option value="Other" <?php if ($university == 'FSEG')
+                                echo 'selected'; ?>>FSEG</option>
+                                 <option value="Other" <?php if ($university == 'ENSI')
+                                echo 'selected'; ?>>ENSI</option>
+                                 <option value="Other" <?php if ($university == 'ENIT')
+                                echo 'selected'; ?>>ENIT</option>
                         </select>
                     </div>
 
